@@ -1,104 +1,14 @@
-# Dynamic Dashboard with Flask and Docker
-
-This project demonstrates a dynamic web dashboard built with **Flask** that reads data from Excel (`.xlsx`) or CSV files and displays it interactively on a web interface. The application is containerized using **Docker** for easy deployment and portability.
-
----
-
-## Project Structure
-
-.
-├── app.py # Flask backend application
-├── Dockerfile # Docker configuration for containerization
-├── index.html # Frontend template for dashboard
-├── requirements.txt # Python dependencies
-├── Change Activity Tracking Sheet.xlsx # Sample data file
-└── README.md # Project documentation
-
-yaml
-Copy code
-
----
-
-## Features
-
-- Reads data from `.xlsx` or `.csv` files.
-- Dynamic and interactive web dashboard.
-- Simple Flask backend to serve data and templates.
-- Fully containerized with Docker for easy deployment.
-- Modular design for easy integration of new datasets.
-
----
-
-## Prerequisites
-
-Make sure you have the following installed:
-
-- [Python 3.8+](https://www.python.org/downloads/)
-- [Docker](https://www.docker.com/get-started)
-- Optional: [pip](https://pip.pypa.io/en/stable/installation/) for local testing
-
----
-
-## Installation
-
-1. **Clone the repository**:
-
-```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-Install Python dependencies (optional if using Docker):
-
-bash
-Copy code
-pip install -r requirements.txt
-Running Locally (Without Docker)
-Ensure the data file Change Activity Tracking Sheet.xlsx is in the project directory.
-
-Run the Flask app:
-
-bash
-Copy code
-python app.py
-Open your browser and navigate to:
-
-cpp
-Copy code
-http://127.0.0.1:5000
-Running with Docker
-Build the Docker image:
-
-bash
-Copy code
-docker build -t flask-dashboard .
-Run the Docker container:
-
-bash
-Copy code
-docker run -p 5000:5000 flask-dashboard
-Open your browser and navigate to:
-
-arduino
-Copy code
-http://localhost:5000
-Usage
-The dashboard reads the Excel/CSV file and displays data in a table or interactive charts.
-
-Modify the Change Activity Tracking Sheet.xlsx file to update the dashboard dynamically.
-
-Frontend customization can be done via index.html and Flask routes in app.py.
-
-Requirements
-Flask
-
-pandas
-
-openpyxl (for reading .xlsx files)
-
-Other dependencies listed in requirements.txt
-
-Notes
-Make sure your data file format matches the columns expected in app.py.
-
-Docker ensures the app runs consistently across different environments.
-
-You can extend this project by adding filters, charts, and other visualizations.
+📊 Dynamic Activity Dashboard (Flask & Docker)Project OverviewThis project provides a dynamic, web-based dashboard for visualizing activity data sourced from a static Excel (.xlsx) or CSV file. The backend is built using Flask, a lightweight Python web framework, which handles data loading, processing (using Pandas), and serving the data to the frontend. The entire application is containerized using Docker for easy deployment and portability.The primary goal is to transform raw activity data from the source file (Change Activity Tracking Sheet.xlsx) into an interactive visualization accessible via a web browser.✨ FeaturesDynamic Data Loading: Automatically reads data from the specified xlsx/csv file upon startup.Flask Backend: Simple and scalable RESTful structure to serve HTML and data endpoints.Responsive Frontend: Displays data in a clean, dynamic web interface (using index.html).Containerized Deployment: Includes a Dockerfile for single-command build and deployment in any Docker environment.Real-time Updates (Simulated): The dashboard refreshes based on the latest data in the source file when the application is restarted.📁 Project StructureThis repository is structured as follows:.
+├── Change Activity Tracking Sheet.xlsx # Your primary data source
+├── Dockerfile                  # Instructions for building the Docker image
+├── README.md                   # This file
+├── app.py                      # Flask application: loads data and serves the dashboard
+├── index.html                  # Frontend template for the dashboard UI
+└── requirements.txt            # Python dependencies (Flask, Pandas, etc.)
+⚙️ Setup and Installation1. PrerequisitesYou must have the following installed on your system:Python 3.8+pip (Python package installer)Docker (Recommended for deployment)2. Local Development SetupTo run the dashboard directly on your machine:Clone the repository:git clone [your-repo-link]
+cd [your-repo-name]
+Install dependencies:The necessary Python libraries (like Flask and Pandas) are listed in requirements.txt.pip install -r requirements.txt
+Prepare your data file:Ensure your activity data is present in the root directory and named exactly: Change Activity Tracking Sheet.xlsx.Run the Flask application:python app.py
+The application will typically be accessible at http://127.0.0.1:5000/.3. Docker Deployment (Recommended)To run the application inside a container for maximum portability:Ensure your data file is in the root directory. The Dockerfile assumes Change Activity Tracking Sheet.xlsx is present.Build the Docker image:This command uses the instructions in the Dockerfile to create a named image.docker build -t activity-dashboard:latest .
+Run the Docker container:This command starts the container and maps the internal port 5000 to external port 8080 on your host machine.docker run -d -p 8080:5000 --name dashboard-app activity-dashboard:latest
+Access the dashboard:Open your web browser and navigate to http://localhost:8080.💻 Core Files Explainedapp.pyThis is the heart of the application. It uses the pandas library to read the data from the Excel file and converts it into a structured format (JSON) that can be consumed by the frontend. It defines routes, including the main route (/) which renders index.html.index.htmlThe single-page frontend template. It will use JavaScript (e.g., Fetch API) to communicate with the Flask backend routes defined in app.py, retrieve the activity data, and dynamically populate the dashboard elements (tables, charts, etc.).DockerfileA multi-stage build file that sets up a clean, minimal Linux environment, installs Python, copies the source code and data, installs dependencies from requirements.txt, and finally runs app.py. It ensures your application runs consistently everywhere.Enjoy visualizing your data!
